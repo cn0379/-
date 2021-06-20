@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>抽奖</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			-webkit-user-select: none;
+		}
+
+		.container {
+			width: 1200px;
+			margin: 30px auto;
+		}
+
+		#operate {
+			display: flex;
+		}
+
+		button {
+			margin-right: 20px;
+			padding: 12px 27px;
+			color: #fff;
+			background-color: orangered;
+			border: none;
+			border-radius: 4px;
+			box-shadow: 3px 3px 3px 0px rgba(242, 39, 6, 0.2);
+			cursor: pointer;
+			outline: none;
+		}
+
+		.user {
+			display: flex;
+			margin-top: 30px;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			transform-style: preserve-3d;
+		}
+
+		.item {
+			position: absolute;
+			width: 13%;
+			color: orangered;
+			text-align: center;
+			line-height: 40px;
+			border: 1px solid orangered;
+			border-radius: 3px;
+			box-sizing: border-box;
+			transition: all .4s ease;
+		}
+
+		.item.reverse {
+			transform: rotateY(180deg);
+			color: orangered;
+			background-color: orangered;
+		}
+
+		.item.act::after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 101%;
+			height: 101%;
+			background-color: rgba(0, 0, 0, .3);
+			content: "";
+		}
+
+		/* .item:last-child{
+				margin-right: 58%;
+			} */
+
+		@keyframes mess {
+
+			100% {
+				top: 130px;
+				left: 43.5%;
+			}
+
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="operate">
+			<button data-type="reverse">翻转卡片</button>
+			<button data-type="mess">打乱顺序</button>
+			<button data-type="start">点击开始</button>
+			<button data-type="end">点击结束</button>
+			<button data-type="log">输出名单</button>
+			<!-- <button data-type="auto">自动抽取</button> -->
+		</div>
+
+		<div class="user"></div>
+
+	</div>
+	<script type="text/javascript">
+		"use strict";
+
+		const arr = ["Emily", "Caspar", "Andy", "Gin", "Heath", "Hugh", "Kery",
+			"Keven", "Luke", "Momo", "Serena", "wiley", "Night", ];
+		const ps = [
+			{ t: 20, l: 0 }, { t: 20, l: 174 }, { t: 20, l: 348 }, { t: 20, l: 522 }, { t: 20, l: 696 }, { t: 20, l: 870 }, { t: 20, l: 1044 },
+			{ t: 82, l: 0 }, { t: 82, l: 174 }, { t: 82, l: 348 }, { t: 82, l: 522 }, { t: 82, l: 696 }, { t: 82, l: 870 }, { t: 82, l: 1044 },
+			{ t: 144, l: 0 }, { t: 144, l: 174 }, { t: 144, l: 348 }, { t: 144, l: 522 }, { t: 144, l: 696 }, { t: 144, l: 870 }, { t: 144, l: 1044 },
+			{ t: 206, l: 0 }, { t: 206, l: 174 }, { t: 206, l: 348 }, { t: 206, l: 522 }, { t: 206, l: 696 }, { t: 206, l: 870 }, { t: 206, l: 1044 }
+		]
+
+		create();
+
+		let sArr = [];
+		let users = $(".user").children; // 获取生成的元素
+		let selectedArr = []; // 被选中的人的数组
+		let wait = 500; // 默认起始速度
+		var speed = true; // 加速度还是减速度
+		let start = false; // 是否正在选择
+
+
+		$(".item").forEach((item, index) => {
+			sArr.push(index);
+			item.addEventListener("animationiteration", () => {
+				upset();
+			})
+			item.addEventListener("animationend", () => {
+				item.style.animation = "";
+			})
+			item.doClass = function (way, className) {
+				if (!way || !className) { return; };
+				this.classList[way](className);
+				return this.doClass.bind(this);
+			}
+			item.onclick = () => item.doClass("toggle", "reverse");
+		})
+
+		// 操作
+		operate.addEventListener("click", () => {
+			var tEle = event.target;
+			var t = tEle.dataset.type;
+
+			if (!t) return;
+
+			if (t == "reverse") {
+				[].slice.call(users).forEach(item => {
+					item.doClass("toggle", "reverse");
+				})
+			} else if (t == "mess") {
+				[].slice.call(users).forEach(item => {
+					item.style.animation = "mess 1s ease-in 2 alternate";
+				})
+			} else if (t == "start") {
+				if (start) {
+					console.log("正在选取中，不能停止");
+				} else {
+					start = true;
+					if (this.timer) clearInterval(this.timer);
+					users[0].doClass("add", "act");
+					speed = true;
+					doFind();
+				}
+
+			} else if (t == "end") {
+				speed = false;
+				start = false;
+
+				// clearInterval(this.timer);
+				// selectedArr.push($(".item.act").innerText);
+				// sArr.splice($(".item.act").dataset.index,1);
+				// $(".item.act").doClass("remove","act")("toggle","reverse");
+			} else if (t == "log") {
+				console.log(`被选中的人：${selectedArr.join(" ")}`);
+			} else {
+				var btns = operate.children;
+				var n = 0;
+
+				var timer = setInterval(() => {
+					btns[2].click();
+					let t = Date.now();
+					setTimeout(() => {
+						btns[3].click();
+					}, Math.floor(Math.random() * 2000) + 900);
+					n++;
+					if (n === 5) {
+						clearInterval(timer);
+					}
+				}, 6500)
+			}
+		})
+
+
+		// 生成
+		function create(f, t) {
+			var str = "";
+			arr.forEach((item, index) => {
+				// str += `<div class="item" data-index="${ index }">${ item }</div>`;
+				str += `<div class="item" data-index="${index}" style="top: ${ps[index].t}px; left:${ps[index].l}px ">${item}</div>`;
+			})
+			$(".user").innerHTML = str;
+		}
+		// 打乱
+		function upset() {
+			// 打乱数组顺序 随机排列
+			arr.sort(() => Math.random() - 0.5);
+			arr.forEach((item, index) => {
+				users[index].innerText = item;
+			})
+		}
+		// 选取
+		function $(str) {
+			var eArr = document.querySelectorAll(str);
+			return eArr.length > 1 ? eArr : eArr[0];
+		}
+		// 加减速度执行
+		function doFind(i = 0) {
+
+			if (speed) {
+				wait === 50 ? wait = 50 : wait -= 50;
+			} else {
+				wait === 500 ? wait = 500 : wait += 50;
+			}
+
+			operate.timer = setTimeout(() => {
+				// 加速度,执行
+				if (i < sArr.length - 1) {
+					sArr[i + 1] === "" ? i += 2 : ++i;
+				} else {
+					i = 0;
+				}
+
+				$(".item.act").doClass("remove", "act");
+				users[i].doClass("add", "act");
+
+				// 结束
+				if (wait >= 500) {
+					clearInterval(operate.timer);
+					selectedArr.push($(".item.act").innerText);
+					sArr.splice($(".item.act").dataset.index, 1, "");
+					$(".item.act").doClass("remove", "act")("toggle", "reverse");
+				} else {
+					doFind(i);
+				}
+
+			}, wait)
+
+		}
+
+	</script>
+</body>
+
+</html>

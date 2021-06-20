@@ -1,0 +1,165 @@
+E:\koa\koa2-blog-server
+├─.gitignore
+├─app.js
+├─package-lock.json
+├─package.json
+├─passport.js
+├─README.en.md
+├─README.md
+├─views
+|   ├─error.ejs
+|   └index.ejs
+├─utils
+|   └createToken.js
+├─routes
+|   └index.js
+├─public
+|   ├─stylesheets
+|   |      └style.css
+|   ├─javascripts
+|   ├─images
+├─models
+|   └user.js
+├─middlewares
+|      ├─checkToken.js
+|      ├─errorHandle.js
+|      └response.js
+├─logs
+|  ├─app-err.log
+|  └app-out.log
+├─controllers
+|      └user.js
+├─configs
+|    ├─index.js
+|    └logConfigs.js
+├─.git
+|  ├─COMMIT_EDITMSG
+|  ├─config
+|  ├─description
+|  ├─FETCH_HEAD
+|  ├─HEAD
+|  ├─index
+|  ├─ORIG_HEAD
+|  ├─packed-refs
+|  ├─refs
+|  |  ├─tags
+|  |  ├─remotes
+|  |  |    ├─origin
+|  |  |    |   ├─HEAD
+|  |  |    |   └master
+|  |  ├─heads
+|  |  |   └master
+|  ├─objects
+|  |    ├─pack
+|  |    |  ├─pack-44887ea1aec2fce8e42be999a9418bab80762bdb.idx
+|  |    |  └pack-44887ea1aec2fce8e42be999a9418bab80762bdb.pack
+|  |    ├─info
+|  |    ├─f3
+|  |    | └ea91a69681bdb326a3cb7199963cc2c5641d4b
+|  |    ├─f0
+|  |    | └5995c9b32d4d64633b4c8f580a5250ec6aba0c
+|  |    ├─e6
+|  |    | └9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+|  |    ├─e5
+|  |    | ├─7da7cdbf7e1f77173b1b27c1769132de9681fa
+|  |    | └971be46a983e125678ab77c763d7a613153266
+|  |    ├─db
+|  |    | └a46a4973c7cf1763e07f598fa790d1f31c6cac
+|  |    ├─da
+|  |    | └5311301017cd3a3babd28017c94b0c89db4c80
+|  |    ├─cc
+|  |    | └50d13e17f35681a4896f1c2ea4e13d4ea1c7e0
+|  |    ├─cb
+|  |    | └897ee36aef8e404d79fe9cf1e63bdd8f8d9964
+|  |    ├─ca
+|  |    | └1c7dd8dedb8e4d7aa42af0b06f65bd98190ad0
+|  |    ├─bf
+|  |    | └540cc4c7dc87e4462970f74865d42af62aaca5
+|  |    ├─b6
+|  |    | └26b48459755fed8c750601ceb5208824c6f101
+|  |    ├─b0
+|  |    | └c1d032ffef25c222a553680302ffbb3c4e3f2a
+|  |    ├─a8
+|  |    | ├─886b076b0593aac70ba5458d2b87d94106d46e
+|  |    | └e47259b972b6fa8866e74eebf44b48926e51d6
+|  |    ├─a6
+|  |    | ├─ba831c3c6650a98733ff74d17cfc3b2d090a34
+|  |    | └e58904c4b35203363b8ebf16c9b9a5e0734b34
+|  |    ├─a1
+|  |    | └744ec6e61301f12d3860225e945ac232b87668
+|  |    ├─9c
+|  |    | └406320884e8a58b564daa91e13a09299b625f3
+|  |    ├─98
+|  |    | └6c805b5f9ea7ccb73dc5a8c02bd6dff0fbea79
+|  |    ├─94
+|  |    | └53385b9916ce9bc5e88d2f5d8cd8a554223590
+|  |    ├─8d
+|  |    | └5d261cd429e9d0669cb6a6f123c745189fc790
+|  |    ├─87
+|  |    | └950de3a6c23e5619f46ed0d607061e805efc48
+|  |    ├─82
+|  |    | └ddbc1d83cbbcf7ff5e1ab87188251fcbfd0cd3
+|  |    ├─7c
+|  |    | └f94edf1ad67d98af6922d15fba4776c959b130
+|  |    ├─6e
+|  |    | └c541de483e753454aae9f4a28235e539bc7ce8
+|  |    ├─68
+|  |    | └4769a3938a65ab09efcc1ed3be3912f1330793
+|  |    ├─5e
+|  |    | ├─06599d990025c0266421cdc77609c1fe1cd13d
+|  |    | └71a19276afcf709a72c22eeb907d7fbd8e957c
+|  |    ├─48
+|  |    | └1de89459ae874e9e3daee03f278ed7701f61d8
+|  |    ├─42
+|  |    | └0282734e70ac55fadf36b4ca365e53fbdcaeec
+|  |    ├─37
+|  |    | └cf4325d955b4e04f8e478694a82122e1e3ac95
+|  |    ├─34
+|  |    | └288d4b5fcb0c102a13bb1f32c93f2761b7db37
+|  |    ├─33
+|  |    | └737af4780955e25283bea0f61a21ec43155477
+|  |    ├─31
+|  |    | └e604c2c6764e6f0f1d5597ed83345a81dbab12
+|  |    ├─2e
+|  |    | └22a2af0bcaa41030fa2fea212f368f43d8f4e2
+|  |    ├─29
+|  |    | └ac9a10f8272a3ec4e6d08a933e17a944be621e
+|  |    ├─1f
+|  |    | ├─29599eb85a3f83c2219f7e877552ec272dee06
+|  |    | ├─8e3494637eb21ae209d63898dd6a27b6b8fbe6
+|  |    | └ee8c35e0707028d6fda7aacb1ae3fd09ea6b95
+|  |    ├─1d
+|  |    | └777bd2c52bac417e406e0d46a15b4ef5fe967f
+|  |    ├─1b
+|  |    | └bc643bd658d8fbdaba707519c755f583642205
+|  |    ├─13
+|  |    | ├─1add4dc3d1dba4856324885d293a7780fd8085
+|  |    | └e3f4aedf62616c9fc50a215aa98cb0005ced33
+|  |    ├─0e
+|  |    | └c19cbf514e5f8e9b1163d2c7f0f894ca3e048a
+|  |    ├─09
+|  |    | └aefaaa09ecb1ffed0f0b9f2ed03d4dd9d9551d
+|  ├─logs
+|  |  ├─HEAD
+|  |  ├─refs
+|  |  |  ├─remotes
+|  |  |  |    ├─origin
+|  |  |  |    |   ├─HEAD
+|  |  |  |    |   └master
+|  |  |  ├─heads
+|  |  |  |   └master
+|  ├─info
+|  |  └exclude
+|  ├─hooks
+|  |   ├─applypatch-msg.sample
+|  |   ├─commit-msg.sample
+|  |   ├─fsmonitor-watchman.sample
+|  |   ├─post-update.sample
+|  |   ├─pre-applypatch.sample
+|  |   ├─pre-commit.sample
+|  |   ├─pre-merge-commit.sample
+|  |   ├─pre-push.sample
+|  |   ├─pre-rebase.sample
+|  |   ├─pre-receive.sample
+|  |   ├─prepare-commit-msg.sample
+|  |   └update.sample
